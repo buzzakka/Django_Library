@@ -1,0 +1,13 @@
+{% extends "catalog/base_generic.html" %}
+
+{% block content %}
+
+<p>Добро пожаловать на мой тестовый проект <em>ReadMe</em>! Это простой проект, на котором я буду оттачивать навыки работы с Django.</p>
+
+<h2>Сейчас на этом сайте:</h2>
+<ul>
+    <li><b>Книг:</b> {{ num_books }}</li>
+    <li><b>Авторов:</b> {{ num_authors }}</li>
+</ul>
+
+{% endblock %}

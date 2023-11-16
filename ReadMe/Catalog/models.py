@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator
+from django.urls import reverse
 
 
 class Author(models.Model):
@@ -41,8 +42,12 @@ class Book(models.Model):
         return ', '.join([genre.genre for genre in self.genre.all()[:3]])
     display_genre.short_description = 'Genre'
     
+    def get_absolute_url(self):
+        return reverse('book_detail', args=[str(self.id)])
+
+    def __str__(self):
+        return self.title
+    
     class Meta:
         ordering = ["title", "author"]
     
-    def __str__(self):
-        return self.title

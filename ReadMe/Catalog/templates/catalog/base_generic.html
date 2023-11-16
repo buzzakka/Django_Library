@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}<title>ReadMe</title>{% endblock %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />  
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Catalog/css/styles.css' %}" />
+</head>
+<body>
+    <div class="container-fluid">
+        <header>
+            <div class="container">
+                <nav id="navigation">
+                    <a href="{% url 'index' %}" class="logo">Логотип сайта</a>
+                    <ul class="menu">
+                        <li><a href="{% url 'books' %}">Все книги</a></li>
+                        <li><a href="#">Все авторы</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <div class="col-sm-10 ">{% block content %}{% endblock %}</div>
+      </div>
+</body>
+</html>

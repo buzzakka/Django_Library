@@ -1,0 +1,30 @@
+{% extends "catalog/base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+<h1>{{ book.title }}</h1>
+<hr>
+<div class="object_content author_content">
+    <div class="left_block">
+        {% if book.image %}
+            <img src="{{MEDIA_URL}}{{ book.image }}" alt="" width="200px">
+        {% else %}
+            <img src="{% static 'Catalog/img/no_image_for_object.png' %}" alt="" width="200px">
+        {% endif %}
+        <div class="rating">
+            Оценка: {{ book.rating }} / 5
+        </div>
+    </div>
+    <div class="right_block">
+        <p><strong>Автор:</strong> <a href="{{ book.author.get_absolute_url }}">{{ book.author }}</a></p>
+        <p><strong>Жанры:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+        <p><strong>Описание: </strong> {{book.description }}</p>
+        <div>
+            <input type="button" class="read_book_button" value="Читать">
+            <input type="button" class="download_book_button" value="Скачать">
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "catalog/base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+<h1>{{ author.first_name }} {{ author.last_name }}</h1>
+<p>{{ author.date_of_birth|date:"d.m.Y" }} - {{ author.date_of_death|date:"d.m.Y"|default:"..." }}</p>
+<hr>
+<div>
+    <div class="left_block">
+        {% if author.image %}
+            <img src="{{MEDIA_URL}}{{ author.image }}" alt="" width="200px">
+        {% else %}
+            <img src="{% static 'Catalog/img/no_image_for_object.png' %}" alt="" width="200px">
+        {% endif %}
+    </div>
+    <div class="right_block">
+        <p><strong>Об авторе:</strong> {{ author.about }}</p>
+        <div class="author_books">
+            <h4>Доступные книги:</h4>
+            {% if author.book_set.all %}
+                {% for book in author.book_set.all %}
+                    {% include "catalog/authors/authors_book_info.html" with book=book %}
+                {% endfor %}
+            {% else %}
+                <p>Доступных книг нет.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

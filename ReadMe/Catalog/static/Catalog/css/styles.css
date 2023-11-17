@@ -1,24 +1,29 @@
 * {
-    margin: 0;
-    padding: 0;
-}
-
-.container-fluid {
-    margin: 0 auto;
-    width: 1100px;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.menu {
-    display: flex;
+    vertical-align: baseline;
+	font-weight: inherit;
+	font-family: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	border: 0 none;
+	outline: 0;
+	padding: 0;
+	margin: 0;
     list-style-type: none;
 }
 
-.menu li {
-    padding: 15px 10px;
+.container-fluid {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .container nav li {
+    display: inline;
+    align-items: center;
+    vertical-align: middle;
 }

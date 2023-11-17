@@ -1,0 +1,15 @@
+{% load static %}
+
+<div class="in_author_book">
+    <div class="book_image">
+        {% if book.image %}
+            <img src="{{MEDIA_URL}}{{ book.image }}" alt="" width="100px">
+        {% else %}
+            <img src="{% static 'Catalog/img/no_image_for_object.png' %}" alt="" width="100px">
+        {% endif %}
+    </div>
+    <div class="book_about">
+        <p><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></p>
+        <p>{{ book.description }}</p>
+    </div>
+</div>

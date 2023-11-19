@@ -4,8 +4,6 @@ from django.urls import reverse
 
 from ReadMe.settings import MEDIA_ROOT
 
-import os
-
 
 def author_media_path(instance, filename):
     return f'authors/{instance.id}/{filename}'

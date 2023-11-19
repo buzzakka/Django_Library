@@ -12,7 +12,7 @@
                     </div>
                     <div class="books-list__books-info subobject-item__about">
                         <h3><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></h3>
-                        {% include "catalog/common/objects_about.html" with object=author object_name="о книге" %}
+                        {% include "catalog/common/objects_about.html" with object=book object_name="о книге" %}
                     </div>
                 </li>
             {% endfor %}

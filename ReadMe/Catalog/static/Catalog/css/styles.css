@@ -73,3 +73,7 @@ header .container nav li {
 .authors-list h1, .books-list h1 {
     margin-top: 10px;
 }
+
+.book__about *:not(:first-child) {
+    margin-top: 5px;
+}

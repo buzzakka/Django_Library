@@ -44,7 +44,7 @@ class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(Author, null=True, on_delete=models.SET_NULL)
     genre = models.ManyToManyField(Genre)
-    description = models.TextField(max_length=1000)
+    about = models.TextField(max_length=1000)
     rating = models.PositiveSmallIntegerField(validators=[MaxValueValidator(5)], default=0)
     link_to_file = models.FileField(upload_to=book_directory_path, null=True, blank=True)
     image = models.ImageField(upload_to=book_directory_path, null=True, blank=True)

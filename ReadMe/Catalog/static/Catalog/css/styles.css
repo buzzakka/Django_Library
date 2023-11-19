@@ -37,36 +37,39 @@ header .container nav li {
     vertical-align: middle;
 }
 
-.objects_header {
+#navigation .menu li {
+    padding: 0 8px;
+}
+
+/* .author__header {
     padding: 5px 0;
+} */
+
+.authors-books {
+    margin-top: 5px;
 }
 
-.objects_header h1 {
-    margin-bottom: 5px;
+.author__header p {
+    margin-top: 5px;
 }
 
-.objects_info {
+.object-item, .subobject-item {
     display: flex;
-    padding: 5px 0;
+    margin-top: 10px;
 }
 
-.objects_about {
-    padding: 0 0 0 20px;
+.object-item__about {
+    margin-left: 20px;
 }
 
-.objects_about p {
-    padding: 10px 0 0 0;
+.subobject-item__about {
+    margin-left: 15px;
 }
 
-.authors_book {
-    display: flex;
-    padding: 10px 0;
+.subobject-item__about p {
+    margin-top: 5px;
 }
 
-.authors_book_about {
-    padding: 0 10px;
-}
-
-.authors_book_about h4 {
-    margin-bottom: 7px;
+.authors-list h1, .books-list h1 {
+    margin-top: 10px;
 }

@@ -1,15 +1,25 @@
 {% extends "catalog/base_generic.html" %}
 
 {% block content %}
-<h1>Список книг:</h1>
-{% if book_list %}
-<ul>
-    {% for book in book_list %}
-        <li><a href="{{ book.get_absolute_url }}">{{ book.title }}</a> - {{ book.author }}</li>
-    {% endfor %}
-</ul>
-{% else %}
-    <p>Сейчас на сайте нет книг.</p>
-{% endif %}
+<div class="books-list">
+    <h1>Список книг:</h1>
+    {% if book_list %}
+        <ul>
+            {% for book in book_list %}
+                <li class="books-list__item subobject-item">
+                    <div class="books-list__books-img subobject-item__img">
+                        {% include "catalog/common/objects_image.html" with object=book img_size=150 %}
+                    </div>
+                    <div class="books-list__books-info subobject-item__about">
+                        <h3><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></h3>
+                        {% include "catalog/common/objects_about.html" with object=author object_name="о книге" %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Сейчас на сайте нет книг.</p>
+    {% endif %}
+</div>
 
 {% endblock %}

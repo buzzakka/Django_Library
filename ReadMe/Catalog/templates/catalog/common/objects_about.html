@@ -1,0 +1,5 @@
+{% if object.about %}
+    <p>{{ object.about }}</p>
+{% else %}
+    <p>К сожалению, сейчас информация {{ object_name }} отсутствует.</p>
+{% endif %}

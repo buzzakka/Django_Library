@@ -1,14 +1,25 @@
 {% extends "catalog/base_generic.html" %}
+{% load static %}
 
 {% block content %}
-<h1>Авторы: </h1>
-{% if author_list %}
-<ul>
-    {% for author in author_list %}
-        <li><a href="{{ author.get_absolute_url }}">{{ author.first_name }} {{ author.last_name }}</a></li>
-    {% endfor %}
-</ul>
-
-{% endif %}
-
+<div class="authors-list">
+    <h1>Авторы: </h1>
+    {% if author_list %}
+        <ul>
+            {% for author in author_list %}
+            <li class="authors-list__item subobject-item">
+                <div class="authors-list__authors-img subobject-item__img">
+                    {% include "catalog/common/objects_image.html" with object=author img_size=150 %}
+                </div>
+                <div class="authors-list__authors-info subobject-item__about">
+                    <h3><a href="{{ author.get_absolute_url }}">{{ author.first_name }} {{ author.last_name }}</a></h3>
+                    {% include "catalog/common/objects_about.html" with object=author object_name="об авторе" %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Сейчас на сайте нет авторов.</p>
+    {% endif %}
+</div>
 {% endblock %}

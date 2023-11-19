@@ -1,0 +1,9 @@
+{% load static %}
+
+{% if object.image %}
+    <a href="{{ object.get_absolute_url }}">
+        <img src="{{MEDIA_URL}}{{ object.image }}" alt="" width="{{ img_size }}">
+    </a>
+{% else %}
+    <img src="{% static 'Catalog/img/no_image_for_object.png' %}" alt="" width="{{ img_size }}">
+{% endif %}

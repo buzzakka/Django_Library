@@ -1,17 +1,11 @@
 {% load static %}
 
-<div class="authors_book">
-    <div class="authors_book_image">
-        {% if book.image %}
-            <a href="{{ book.get_absolute_url }}">
-                <img src="{{MEDIA_URL}}{{ book.image }}" alt="" width="120px">
-            </a>
-        {% else %}
-            <img src="{% static 'Catalog/img/no_image_for_object.png' %}" alt="" width="120px">
-        {% endif %}
+<div class="authors-book subobject-item">
+    <div class="authors-book__image">
+        {% include "catalog/common/objects_image.html" with object=book img_size=120 %}
     </div>
-    <div class="authors_book_about">
-        <h4><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></h4>
+    <div class="authors-book__about subobject-item__about">
+        <h3><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></h3>
         <p>{{ book.description }}</p>
     </div>
 </div>

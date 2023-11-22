@@ -4,36 +4,53 @@
 	margin: 0;
     list-style-type: none;
     text-align: justify;
+    text-decoration: none;
+    color: black;
 }
 
-body {
+html, body {
     font-family: 'Fira Sans Condensed', sans-serif;
+    height: 100%;
 }
 
 p {
     font-weight: 200;
 }
 
-.container-fluid {
-    max-width: 1200px;
-    margin: 0 auto;
+a {
+    color: #3399FF;
 }
 
-header {
+a:not(.underline-link):hover {
+    text-decoration: underline;
+}
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
     width: 100%;
-    background: #D8E3AB;
-    padding: 10px 0;
+    /* background: #D8E3AB; */
+    display: flex;
+    justify-content: space-between;
+    font-size: 17px;
 }
 
-header .container {
+.header__left {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    padding: 0 20px;
 }
 
-header .container nav li {
+.header__left .logo {
+    margin-right: 20px;
+}
+
+.header__left nav li {
     display: inline;
-    align-items: center;
     vertical-align: middle;
 }
 
@@ -41,9 +58,17 @@ header .container nav li {
     padding: 0 8px;
 }
 
-/* .author__header {
-    padding: 5px 0;
-} */
+.header__right {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    flex: 1 1 auto;
+}
 
 .authors-books {
     margin-top: 5px;
@@ -76,4 +101,49 @@ header .container nav li {
 
 .book__about *:not(:first-child) {
     margin-top: 5px;
+}
+
+footer {
+    /* background: #D8E3AB; */
+    margin: auto;
+}
+
+footer a:not(:last-child) {
+    margin-right: 20px;
+    text-decoration: none !important;
+}
+
+footer img {
+    width: 30px;
+    padding: 20px 0;
+}
+
+.underline-link {
+	color: #3399FF; /* Цвет обычной ссылки */
+    position: relative;
+    cursor: pointer;
+    text-decoration: none; /* Убираем подчеркивание */
+}
+.underline-link:after {
+	content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: -3px;
+    width: 0;
+    height: 2px; /* Высота линии */
+    background-color: #3399FF; /* Цвет подчеркивания при исчезании линии*/
+    transition: width 0.5s; /* Время эффекта */
+}
+
+.underline-link:hover:after {
+	content: "";
+    width: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 2px; /* Высота линии */
+    background-color: #3399FF; /* Цвет подчеркивания при появлении линии */
+    transition: width 0.5s;  /* Время эффекта */
 }

@@ -1,31 +1,59 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     {% block title %}<title>ReadMe</title>{% endblock %}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="{% static 'Catalog/img/title.png' %}"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,200;0,400;0,600;1,200&display=swap" rel="stylesheet">
-    {% load static %}
     <link rel="stylesheet" href="{% static 'Catalog/css/styles.css' %}" />
 </head>
 <body>
-    <div class="container-fluid">
-        <header>
-            <div class="container">
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__left">
                 <a href="{% url 'index' %}" class="logo">
-                    <img src="{% static 'Catalog/img/logo.png' %}" alt="" width="55px">
+                    <img src="{% static 'Catalog/img/main_logo.svg' %}" alt="" width="75px">
                 </a>
                 <nav id="navigation">
                     <ul class="menu">
-                        <li><a href="{% url 'books' %}">Все книги</a></li>
-                        <li><a href="{% url 'authors' %}">Все авторы</a></li>
+                        <li><a href="{% url 'books' %}" class="underline-link">Все книги</a></li>
+                        <li><a href="{% url 'authors' %}" class="underline-link">Все авторы</a></li>
                     </ul>
                 </nav>
             </div>
+            <div class="header__right">
+                <a href="" class="login underline-link">Войти</a>
+            </div>
         </header>
-        <div class="content">{% block content %}{% endblock %}</div>
-      </div>
+        <div class="content">
+            {% block content %}{% endblock %}
+            {% block pagination %}
+                {% if is_paginated %}
+                    {% include "catalog/common/paginator.html"%}
+                {% endif %}
+            {% endblock %}
+        </div>
+        <footer>
+            <div class="social_medias">
+                <a href="https://t.me/fossowan" target="_blank">
+                    <img src="{% static 'Catalog/img/social_media_logos/tg_logo.svg' %}" alt="">
+                </a>
+                <a href="https://github.com/buzzakka" target="_blank">
+                    <img src="{% static 'Catalog/img/social_media_logos/github_logo.svg' %}" alt="">
+                </a>
+                <a href="buzzakka6@gmail.com" target="_blank">
+                    <img src="{% static 'Catalog/img/social_media_logos/gmail_logo.svg' %}" alt="">
+                </a>
+                <a href="https://vk.com/th3nightwemet" target="_blank">
+                    <img src="{% static 'Catalog/img/social_media_logos/vk_logo.svg' %}" alt="">
+                </a>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>

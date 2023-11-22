@@ -19,9 +19,9 @@
             <p><strong>Жанры:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
             <p><strong>Описание: </strong></p>
             {% include "catalog/common/objects_about.html" with object=book object_name="о книге" %}
-            <div>
-                <input type="button" class="read_book_button" value="Читать">
-                <input type="button" class="download_book_button" value="Скачать">
+            <div class="book__buttons">
+                <input type="button" class="read_book_button button" value="Читать">
+                <input type="button" class="download_book_button button" value="Скачать">
             </div>
         </div>
     </div>

@@ -12,8 +12,8 @@ def author_media_path(instance, filename):
 
 
 class Author(models.Model):
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
+    first_name = models.CharField(max_length=200, db_index=True)
+    last_name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, unique=True, db_index=True, default=slugify(f"{first_name} {last_name}"))
     date_of_birth = models.DateField(blank=False)
     date_of_death = models.DateField(blank=True, null=True)
@@ -22,6 +22,9 @@ class Author(models.Model):
     
     def get_absolute_url(self):
         return reverse('author_detail', kwargs={'slug': self.slug})
+
+    class Meta:
+        ordering = ["first_name", "last_name"]
     
     def __str__(self):
         return f"{self.last_name} {self.first_name}"
@@ -29,7 +32,7 @@ class Author(models.Model):
 
 
 class Genre(models.Model):
-    genre = models.CharField(max_length=200)
+    genre = models.CharField(max_length=200, db_index=True)
     
     def __str__(self):
         return self.genre
@@ -44,7 +47,7 @@ def book_image_directory_path(instance, filename):
 
 
 class Book(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, unique=True, db_index=True, default=slugify(f"{title}"))
     author = models.ForeignKey(Author, null=True, on_delete=models.SET_NULL)
     genre = models.ManyToManyField(Genre)

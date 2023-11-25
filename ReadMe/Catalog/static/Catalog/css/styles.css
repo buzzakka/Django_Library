@@ -21,6 +21,15 @@ p.about-me {
     text-align: center;
 }
 
+.gif {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15%;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
 a {
     color: #3399FF;
 }

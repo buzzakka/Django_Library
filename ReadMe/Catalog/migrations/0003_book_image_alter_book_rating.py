@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='book',
             name='image',
-            field=models.ImageField(blank=True, null=True, upload_to=Catalog.models.book_image_directory_path),
+            field=models.ImageField(blank=True, null=True, upload_to=Catalog.models.book_directory_path),
         ),
         migrations.AlterField(
             model_name='book',

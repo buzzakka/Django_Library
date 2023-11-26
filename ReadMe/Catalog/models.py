@@ -60,10 +60,6 @@ def book_directory_path(instance, filename):
     return f'books/{instance.slug}/{new_filename}'
 
 
-def book_image_directory_path(instance, filename):
-    return f'books/{instance.slug}/{filename}'
-
-
 class Book(models.Model):
     title = models.CharField(max_length=200, db_index=True, verbose_name="Название")
     slug = models.SlugField(max_length=200, unique=True, db_index=True, default=slugify(f"{title}"))

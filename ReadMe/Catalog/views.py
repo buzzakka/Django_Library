@@ -41,12 +41,10 @@ class AuthorDetailView(generic.DetailView):
 
 def AddAuthor(request):
     if request.method == 'POST':
-        form = AddAuthorForm(request.POST)
+        form = AddAuthorForm(request.POST, request.FILES)
         if form.is_valid():
-            print(form.cleaned_data)
-            # try:
-                
-            # except
+            form.save()
+            return redirect('index')
     else:
         form = AddAuthorForm()
 
@@ -55,12 +53,10 @@ def AddAuthor(request):
 
 def AddBook(request):
     if request.method == 'POST':
-        form = AddBookForm(request.POST)
+        form = AddBookForm(request.POST, request.FILES)
         if form.is_valid():
-            print(form.cleaned_data)
-            # try:
-                
-            # except
+            form.save()
+            return redirect('index')
     else:
         form = AddBookForm()
 
@@ -69,14 +65,10 @@ def AddBook(request):
 
 def AddGenre(request):
     if request.method == 'POST':
-        form = AddGenreForm(request.POST)
+        form = AddGenreForm(request.POST, request.FILES)
         if form.is_valid():
-            # print(form.cleaned_data)
-            try:
-                Genre.objects.create(**form.cleaned_data)
-                return redirect('index')
-            except:
-                form.add_error(None, "Ошибка добавления объекта")
+            form.save()
+            return redirect('index')
     else:
         form = AddGenreForm()
 

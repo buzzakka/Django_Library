@@ -1,10 +1,5 @@
 {% extends "catalog/base_generic.html" %}
 
 {% block content %}
-<h1>Добавить автора:</h1>
-<form action="" method="post" class="add-author-form">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="button">Добавить</button>
-</form>
+{% include "catalog/common/add_object.html" with object_name="автора" %}
 {% endblock %}

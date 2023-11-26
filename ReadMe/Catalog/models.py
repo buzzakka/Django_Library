@@ -8,7 +8,8 @@ from slugify import slugify
 
 
 def author_media_path(instance, filename):
-    return f'authors/{instance.id}/{filename}'
+    new_filename = f"{instance.slug}.{filename.split('.')[1]}"
+    return f'authors/{instance.slug}/{new_filename}'
 
 
 class Author(models.Model):
@@ -21,7 +22,7 @@ class Author(models.Model):
     image = models.ImageField(upload_to=author_media_path, null=True, blank=True, verbose_name='Изображение')
     
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.first_name, self.last_name)
+        self.slug = slugify(f"{self.first_name} {self.last_name}")
         return super().save(*args, **kwargs)   
     
     def get_absolute_url(self):
@@ -55,11 +56,12 @@ class Genre(models.Model):
 
 
 def book_directory_path(instance, filename):
-    return f'books/{instance.id}/{filename}'
+    new_filename = f"{instance.slug}.{filename.split('.')[1]}"
+    return f'books/{instance.slug}/{new_filename}'
 
 
 def book_image_directory_path(instance, filename):
-    return f'books/{instance.id}/{filename}'
+    return f'books/{instance.slug}/{filename}'
 
 
 class Book(models.Model):

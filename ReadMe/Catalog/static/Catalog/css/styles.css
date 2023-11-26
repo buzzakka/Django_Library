@@ -197,7 +197,12 @@ form p label {
     vertical-align: top;
 }
 
-form input, form textarea {
+form input, form textarea, select {
     font-size: 15px;
     padding: 2px 5px;
+}
+
+.errorlist li {
+    color: red;
+    margin-bottom: 10px;
 }

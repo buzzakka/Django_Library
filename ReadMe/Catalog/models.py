@@ -39,7 +39,7 @@ class Author(models.Model):
 
 
 class Genre(models.Model):
-    genre = models.CharField(max_length=200, db_index=True, verbose_name='Жанр')
+    genre = models.CharField(max_length=200, db_index=True, unique=True, verbose_name='Жанр')
     slug = models.SlugField(max_length=200, unique=True, db_index=True)
     
     def save(self, *args, **kwargs):
@@ -61,7 +61,7 @@ def book_directory_path(instance, filename):
 
 
 class Book(models.Model):
-    title = models.CharField(max_length=200, db_index=True, verbose_name="Название")
+    title = models.CharField(max_length=200, unique=True, db_index=True, verbose_name="Название")
     slug = models.SlugField(max_length=200, unique=True, db_index=True, default=slugify(f"{title}"))
     author = models.ForeignKey(Author, null=True, on_delete=models.SET_NULL, verbose_name='Автор')
     genre = models. ManyToManyField(Genre, verbose_name='Жанр')

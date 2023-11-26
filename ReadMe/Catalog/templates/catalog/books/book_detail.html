@@ -20,8 +20,10 @@
             <p><strong>Описание: </strong></p>
             {% include "catalog/common/objects_about.html" with object=book object_name="о книге" %}
             <div class="book__buttons">
-                <input type="button" class="read_book_button button" value="Читать">
-                <input type="button" class="download_book_button button" value="Скачать">
+                {% if book.link_to_file %}
+                    <input type="button" class="read_book_button button" value="Читать">
+                    <input type="button" class="download_book_button button" value="Скачать">
+                {% endif %}
             </div>
         </div>
     </div>

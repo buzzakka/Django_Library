@@ -14,11 +14,15 @@ def author_media_path(instance, filename):
 class Author(models.Model):
     first_name = models.CharField(max_length=200, db_index=True, verbose_name='Имя')
     last_name = models.CharField(max_length=200, db_index=True, verbose_name='Фамилия')
-    slug = models.SlugField(max_length=200, unique=True, db_index=True, default=slugify(f"{first_name} {last_name}"))
+    slug = models.SlugField(max_length=200, unique=True, db_index=True)
     date_of_birth = models.DateField(blank=False, verbose_name='Дата рождения')
     date_of_death = models.DateField(blank=True, null=True, verbose_name='Дата смерти')
     about = models.TextField(max_length=1000, blank=True, null=True, default="", verbose_name='Об авторе')
-    image = models.ImageField(upload_to=author_media_path, null=True, blank=True, verbose_name='Изображение')        
+    image = models.ImageField(upload_to=author_media_path, null=True, blank=True, verbose_name='Изображение')
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.first_name, self.last_name)
+        return super().save(*args, **kwargs)   
     
     def get_absolute_url(self):
         return reverse('author_detail', kwargs={'slug': self.slug})
@@ -35,7 +39,11 @@ class Author(models.Model):
 
 class Genre(models.Model):
     genre = models.CharField(max_length=200, db_index=True, verbose_name='Жанр')
-    slug = models.SlugField(max_length=200, unique=True, db_index=True, default=slugify(f'{genre}'))
+    slug = models.SlugField(max_length=200, unique=True, db_index=True)
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.genre)
+        return super().save(*args, **kwargs)
     
     class Meta:
         ordering = ["genre"]
@@ -63,6 +71,10 @@ class Book(models.Model):
     rating = models.PositiveSmallIntegerField(validators=[MaxValueValidator(5)], default=0, verbose_name='Рейтинг')
     link_to_file = models.FileField(upload_to=book_directory_path, null=True, blank=True, verbose_name='Путь до файла')
     image = models.ImageField(upload_to=book_directory_path, null=True, blank=True, verbose_name='Изображение')
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
     
     def display_genre(self):
         return ', '.join([genre.genre for genre in self.genre.all()[:3]])

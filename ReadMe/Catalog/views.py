@@ -1,5 +1,5 @@
 from typing import Any
-from django.shortcuts import render, redirect
+# from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
@@ -18,7 +18,7 @@ class Index(TemplateView):
 class BookListView(ListView):
     model = Book
     template_name = 'catalog/books/book_list.html'
-    paginate_by = 10
+    paginate_by = 5
     
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
@@ -39,7 +39,7 @@ class BookDetailView(DetailView):
 class AuthorListView(ListView):
     model = Author
     template_name = 'catalog/authors/author_list.html'
-    paginate_by = 10
+    paginate_by = 5
     
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)

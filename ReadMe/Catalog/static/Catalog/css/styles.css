@@ -210,3 +210,22 @@ form input, form textarea, select {
 .edit-object {
     font-size: 20px;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination a, .page-num-selected {
+    padding: 8px 16px;
+    float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.pagination .page-num-selected, .pagination a:hover:not(.page-num-selected) {
+    background-color: #3399FF;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}

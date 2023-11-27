@@ -3,7 +3,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% block title %}<title>ReadMe</title>{% endblock %}
+    <title>ReadMe
+        {% if title_name %}
+            | {{ title_name }}
+        {% endif %}
+    </title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="{% static 'Catalog/img/title.png' %}"/>

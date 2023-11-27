@@ -5,7 +5,11 @@
 
 <div class="author">
     <div class="author__header">
-        <h1>{{ author.first_name }} {{ author.last_name }}</h1>
+        <h1>
+            {{ author.first_name }} {{ author.last_name }} 
+            <a href="{% url 'edit_author' slug=author.slug %}" class="edit-object">[Редактировать]</a>
+            <a href="{% url 'delete_author' slug=author.slug %}" class="edit-object">[Удалить]</a>
+        </h1>
         <p>{{ author.date_of_birth|date:"d.m.Y" }} - {{ author.date_of_death|date:"d.m.Y"|default:"..." }}</p>
     </div>
     <div class="author__info object-item">

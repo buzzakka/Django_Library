@@ -206,3 +206,7 @@ form input, form textarea, select {
     color: red;
     margin-bottom: 10px;
 }
+
+.edit-object {
+    font-size: 20px;
+}

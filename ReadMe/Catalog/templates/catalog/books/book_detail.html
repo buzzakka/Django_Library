@@ -4,7 +4,11 @@
 {% block content %}
 
 <div class="book">
-    <h1>{{ book.title }}</h1>
+    <h1>
+        {{ book.title }}
+        <a href="{% url 'edit_book' slug=book.slug %}" class="edit-object">[Редактировать]</a>
+        <a href="{% url 'delete_book' slug=book.slug %}" class="edit-object">[Удалить]</a>
+    </h1>
     <div class="book__info object-item">
         <div class="book__left-column">
             <div class="book__img">

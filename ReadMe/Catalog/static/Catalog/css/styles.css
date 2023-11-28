@@ -79,7 +79,7 @@ a:not(.underline-link):hover {
     margin-right: 20px;
 }
 
-.content {
+.container {
     width: 1250px;
     margin: 0 auto;
     flex: 1 1 auto;

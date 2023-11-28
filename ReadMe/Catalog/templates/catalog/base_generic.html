@@ -34,10 +34,17 @@
                 <a href="{% url 'add_book' %}">Добавить книгу</a>
                 <a href="{% url 'add_author' %}">Добавить автора</a>
                 <a href="{% url 'add_genre' %}">Добавить жанр</a>
-                <a href="" class="login underline-link">Войти</a>
+                {% if user.is_authenticated %}
+                    <p>{{ user.username }} | <a href="{% url 'users:logout' %}" class="logout underline-link">Выйти</a></p>
+                {% else %}
+                    <a href="{% url 'users:login' %}" class="login underline-link">Войти</a>
+                {% endif %}
             </div>
         </header>
-        <div class="content">
+        <div class="container">
+            <aside class="left">
+                left
+            </aside>
             {% block content %}{% endblock %}
             {% block pagination %}
                 {% if is_paginated %}

@@ -1,0 +1,85 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ReadMe
+        {% if title_name %}
+            | {{ title_name }}
+        {% endif %}
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="{% static 'Catalog/img/title.png' %}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,200;0,400;0,600;1,200&display=swap" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{% static 'Catalog/css/new_styles.css' %}" />
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="container">
+                <ul class="menu-nav">
+                    <li><a href="{% url 'index' %}" class="logo">
+                        <img src="{% static 'Catalog/img/main_logo.svg' %}" alt="" width="50px">
+                    </a></li>
+                </ul>
+                <div class="login-block">
+                    {% if user.is_authenticated %}
+                        <p>{{ user.username }} | <a href="{% url 'users:logout' %}" class="logout underline-link">Выйти</a></p>
+                    {% else %}
+                        <a href="{% url 'users:login' %}" class="login underline-link">Войти</a>
+                    {% endif %}
+                </div>
+            </div>
+        </header>
+        <main class="main">
+            <div class="container">
+                <div class="sidebar-nav">
+                    <ul>
+                        <a href="{% url 'books' %}">
+                            <li>
+                                <img src="{% static 'Catalog/img/icons/books.png' %}" alt="" class="sidebar-nav__icon">
+                                <span>Все книги</span>
+                            </li>
+                        </a>
+                        <a href="{% url 'authors' %}">
+                            <li>
+                                <img src="{% static 'Catalog/img/icons/authors.png' %}" alt="" class="sidebar-nav__icon">
+                                <span>Все авторы</span>
+                            </li>
+                        </a>
+                        {% if user.is_authenticated %}
+                        <a href="#" class="">
+                            <li>
+                                <img src="{% static 'Catalog/img/icons/my-books.png' %}" alt="" class="sidebar-nav__icon">
+                                <span>Моя полка</span>
+                            </li>
+                        </a>
+                        <a href="{% url 'add_book' %}" class=""><li>Добавить книгу</li></a>
+                        <a href="{% url 'add_author' %}" class=""><li>Добавить автора</li></a>
+                        <a href="{% url 'add_genre' %}" class=""><li>Добавить жанр</li></a>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="content">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div class="container">
+                <div class="social-medias">
+                    <a href="https://t.me/fossowan" target="_blank">
+                        <img src="{% static 'Catalog/img/social_media_logos/tg_logo.svg' %}" alt="https://t.me/fossowan">
+                    </a>
+                    <a href="https://github.com/buzzakka" target="_blank">
+                        <img src="{% static 'Catalog/img/social_media_logos/github_logo.svg' %}" alt="https://github.com/buzzakka">
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

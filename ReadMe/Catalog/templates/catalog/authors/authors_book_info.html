@@ -1,10 +1,10 @@
 {% load static %}
 
-<div class="authors-book subobject-item">
-    <div class="authors-book__image">
+<div class="post-object list-block__item">
+    <div class="list-block__image">
         {% include "catalog/common/objects_image.html" with object=book img_size=120 %}
     </div>
-    <div class="authors-book__about subobject-item__about">
+    <div class="list-block__info">
         <h3><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></h3>
         <p>{{ book.about|linebreaks|truncatewords:100 }}</p>
     </div>

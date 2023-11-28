@@ -1,6 +1,8 @@
-<h1>Редактировать {{ object_name }}:</h1>
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="button">Редактировать</button>
-</form>
+<div class="post-object edit-object">
+    <h2>Редактировать {{ object_name }}:</h2>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button">Редактировать</button>
+    </form>
+</div>

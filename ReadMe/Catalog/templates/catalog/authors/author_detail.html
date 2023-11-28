@@ -1,10 +1,10 @@
-{% extends "catalog/base_generic.html" %}
+{% extends "catalog/base.html" %}
 {% load static %}
 
 {% block content %}
 
-<div class="author">
-    <div class="author__header">
+<div class="post-object big-object author">
+    <div>
         <h1>
             {{ author.first_name }} {{ author.last_name }} 
             <a href="{% url 'edit_author' slug=author.slug %}" class="edit-object">[Редактировать]</a>
@@ -12,25 +12,26 @@
         </h1>
         <p>{{ author.date_of_birth|date:"d.m.Y" }} - {{ author.date_of_death|date:"d.m.Y"|default:"..." }}</p>
     </div>
-    <div class="author__info object-item">
-        <div class="author__img">
+    <div class="big-object__info author__info">
+        <div class="big-object__image author__image">
             {% include "catalog/common/objects_image.html" with object=author img_size=200 %}
         </div>
-        <div class="author__about object-item__about">
+        <div class="author__about">
             <h3>Об авторе:</h3>
             {% include "catalog/common/objects_about.html" with object=author object_name="об авторе" %}
         </div>
     </div>
-    <div class="authors-books">
-        <h3>Доступные книги:</h3>
-        {% if author.book_set.all %}
-            {% for book in author.book_set.all %}
-                {% include "catalog/authors/authors_book_info.html" with book=book %}
-            {% endfor %}
-        {% else %}
-            <p>Доступных книг нет.</p>
-        {% endif %}
-    </div>
+</div>
+
+<div class="list-block">
+    <h2>Доступные книги:</h2>
+    {% if author.book_set.all %}
+        {% for book in author.book_set.all %}
+            {% include "catalog/authors/authors_book_info.html" with book=book %}
+        {% endfor %}
+    {% else %}
+        <p>Доступных книг нет.</p>
+    {% endif %}
 </div>
 
 {% endblock %}

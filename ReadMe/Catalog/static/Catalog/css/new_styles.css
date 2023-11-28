@@ -6,6 +6,7 @@
     text-align: justify;
     text-decoration: none;
     color: black;
+    box-sizing: border-box;
     /* font-family: 'Fira Sans Condensed', sans-serif; */
 }
 
@@ -36,12 +37,18 @@ header {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+header .logo {
+    display: flex;
+    align-items: center;
+}
+header .logo img {
+    margin-right: 15px;
+}
+
 header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
-    /* border: 1px solid black; */
 }
 
 .menu-nav {
@@ -51,7 +58,6 @@ header .container {
 
 .menu-nav a {
     margin-right: 25px;
-    /* font-size: 18px; */
 }
 
 .main {
@@ -66,7 +72,8 @@ header .container {
 .sidebar-nav {
     display: flex;
     flex-direction: column;
-    min-width: 200px;
+    min-width: 180px;
+    margin-right: 20px;
 }
 
 .sidebar-nav__icon {
@@ -80,6 +87,7 @@ header .container {
     align-items: center;
     margin-bottom: 10px;
     border-radius: 5px;
+    height: 40px;
 }
 
 .sidebar-nav li:hover {
@@ -93,14 +101,16 @@ header .container {
     justify-content: center;
 }
 
-/* .content {
+.content {
     flex: 1;
-} */
+}
 
 .post-object {
     background-color: #fff;
     border-radius: 20px;
     padding: 20px;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 
@@ -148,4 +158,98 @@ footer .container {
 
 .social-medias a:not(:last-child) {
     margin-right: 20px;
+}
+
+form {
+    margin-top: 10px;
+}
+
+form p {
+    margin-bottom: 15px;
+}
+
+form p label {
+    display: inline-block;
+    width: 150px;
+    vertical-align: top;
+}
+
+form input, form textarea, select {
+    font-size: 15px;
+    padding: 2px 5px;
+}
+
+.list-block__item {
+    display: flex;
+    flex-direction: row;
+}
+
+.list-block__info h3 {
+    font-size: 22px;
+}
+
+.list-block__item img {
+    margin-right: 25px;
+}
+
+.list-block h1 {
+    margin-bottom: 20px;
+}
+
+.list-block h2 {
+    margin-bottom: 15px;
+}
+
+.list-block__item a {
+    color:#3399FF
+}
+
+.big-object p {
+    margin: 8px 0;
+}
+
+.big-object__info {
+    display: flex;
+}
+
+.big-object__image {
+    margin-right: 20px;
+}
+
+a.edit-object {
+    font-size: 20px;
+    color: #3399FF;
+}
+
+a.edit-object:hover {
+    text-decoration: underline;
+}
+
+.book h1 {
+    margin-bottom: 15px;
+}
+
+.book__buttons {
+    margin-top: 20px;
+}
+
+.book__buttons .button {
+    margin-right: 10px;
+}
+
+.button {
+    padding: 10px 15px;
+    background-color: #3399FF;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.1s;
+}
+
+.button:active {
+    background-color: #1a66cc; /* Цвет фона при нажатии */
+}
+
+.authorization-form {
+    text-align: center;
 }

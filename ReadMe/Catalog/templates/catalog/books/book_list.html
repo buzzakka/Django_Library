@@ -1,19 +1,18 @@
-{% extends "catalog/base_generic.html" %}
+{% extends "catalog/base.html" %}
 
 {% block content %}
-<div class="books-list">
+<div class="list-block">
     <h1>
         Список книг:
-        <a href="{% url 'add_book' %}" class="edit-object">Добавить книгу</a>
     </h1>
     {% if book_list %}
         <ul>
             {% for book in book_list %}
-                <li class="books-list__item subobject-item">
-                    <div class="books-list__books-img subobject-item__img">
+                <li class="post-object list-block__item">
+                    <div class="list-block__image">
                         {% include "catalog/common/objects_image.html" with object=book img_size=150 %}
                     </div>
-                    <div class="books-list__books-info subobject-item__about">
+                    <div class="list-block__info">
                         <h3><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></h3>
                         {% include "catalog/common/objects_about.html" with object=book object_name="о книге" %}
                     </div>

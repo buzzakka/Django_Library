@@ -1,21 +1,21 @@
-{% extends "catalog/base_generic.html" %}
+{% extends "catalog/base.html" %}
 {% load static %}
 
 {% block content %}
 
-<div class="book">
+<div class="post-object big-object book">
     <h1>
         {{ book.title }}
         <a href="{% url 'edit_book' slug=book.slug %}" class="edit-object">[Редактировать]</a>
         <a href="{% url 'delete_book' slug=book.slug %}" class="edit-object">[Удалить]</a>
     </h1>
-    <div class="book__info object-item">
-        <div class="book__left-column">
-            <div class="book__img">
+    <div class="big-object__info">
+        <div>
+            <div class="big-object__image">
                 {% include "catalog/common/objects_image.html" with object=book img_size=200 %}
             </div>
-            <div class="rating">
-                Рейтинг: {{ book.rating }} / 5
+            <div class="book__rating">
+                <p>Рейтинг: {{ book.rating }} / 5</p>
             </div>
         </div>
         <div class="book__about object-item__about">
@@ -25,8 +25,8 @@
             {% include "catalog/common/objects_about.html" with object=book object_name="о книге" %}
             <div class="book__buttons">
                 {% if book.link_to_file %}
-                    <input type="button" class="read_book_button button" value="Читать">
-                    <input type="button" class="download_book_button button" value="Скачать">
+                    <button type="submit" class="button">Читать</button>
+                    <button type="submit" class="button">Скачать</button>
                 {% endif %}
             </div>
         </div>

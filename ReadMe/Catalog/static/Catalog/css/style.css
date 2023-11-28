@@ -251,5 +251,13 @@ a.edit-object:hover {
 }
 
 .authorization-form {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+
+.authorization-form form {
     text-align: center;
 }

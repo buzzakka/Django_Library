@@ -1,14 +1,17 @@
 {% extends "catalog/base.html" %}
 {% load static %}
+{% load catalog_tags %}
 
 {% block content %}
 
 <div class="post-object big-object author">
     <div>
         <h1>
-            {{ author.first_name }} {{ author.last_name }} 
+            {{ author.first_name }} {{ author.last_name }}
+            {% if request.user|has_group:"staff" %}
             <a href="{% url 'edit_author' slug=author.slug %}" class="edit-object">[Редактировать]</a>
             <a href="{% url 'delete_author' slug=author.slug %}" class="edit-object">[Удалить]</a>
+            {% endif %}
         </h1>
         <p>{{ author.date_of_birth|date:"d.m.Y" }} - {{ author.date_of_death|date:"d.m.Y"|default:"..." }}</p>
     </div>
@@ -25,8 +28,8 @@
 
 <div class="list-block">
     <h2>Доступные книги:</h2>
-    {% if author.book_set.all %}
-        {% for book in author.book_set.all %}
+    {% if page_obj %}
+        {% for book in page_obj %}
             {% include "catalog/authors/authors_book_info.html" with book=book %}
         {% endfor %}
     {% else %}

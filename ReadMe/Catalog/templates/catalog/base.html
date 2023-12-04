@@ -1,4 +1,5 @@
 {% load static %}
+{% load catalog_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +31,10 @@
                     {% if user.is_authenticated %}
                         <p>{{ user.username }} | <a href="{% url 'users:logout' %}" class="logout underline-link">Выйти</a></p>
                     {% else %}
-                        <a href="{% url 'users:login' %}" class="login underline-link">Войти</a>
+                        <p>
+                            <a href="{% url 'users:login' %}" class="login underline-link">Войти</a> |
+                            <a href="{% url 'users:register' %}" class="login underline-link">Регрстрация</a>
+                        </p>
                     {% endif %}
                 </div>
             </div>
@@ -58,14 +62,17 @@
                                 <span>Моя полка</span>
                             </li>
                         </a>
+                        {% if request.user|has_group:"staff" %}
                         <a href="{% url 'add_book' %}" class=""><li>Добавить книгу</li></a>
                         <a href="{% url 'add_author' %}" class=""><li>Добавить автора</li></a>
                         <a href="{% url 'add_genre' %}" class=""><li>Добавить жанр</li></a>
+                        {% endif %}
                         {% endif %}
                     </ul>
                 </div>
                 <div class="content">
                     {% block content %}{% endblock %}
+                    {% include "catalog/common/paginator.html" %}
                 </div>
             </div>
         </main>

@@ -1,13 +1,16 @@
 {% extends "catalog/base.html" %}
 {% load static %}
+{% load catalog_tags %}
 
 {% block content %}
 
 <div class="post-object big-object book">
     <h1>
         {{ book.title }}
+        {% if request.user|has_group:"staff" %}
         <a href="{% url 'edit_book' slug=book.slug %}" class="edit-object">[Редактировать]</a>
         <a href="{% url 'delete_book' slug=book.slug %}" class="edit-object">[Удалить]</a>
+        {% endif %}
     </h1>
     <div class="big-object__info">
         <div>

@@ -1,0 +1,11 @@
+{% load static %}
+
+<div class="post-object list-block__item">
+    <div class="list-block__image">
+        {% include "catalog/common/objects_image.html" with object=book img_size=160 %}
+    </div>
+    <div class="list-block__info">
+        <h3><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></h3>
+        <p>{{ book.about|linebreaks|truncatewords:100 }}</p>
+    </div>
+</div>

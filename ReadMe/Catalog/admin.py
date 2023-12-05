@@ -23,3 +23,8 @@ class GenreAdmin(admin.ModelAdmin):
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'display_genre')
     search_fields=['title', 'author__last_name']
+
+
+@admin.register(Bookshelf)
+class GenreAdmin(admin.ModelAdmin):
+    search_fields=['user']

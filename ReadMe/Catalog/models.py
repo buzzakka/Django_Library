@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MaxValueValidator
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 from ReadMe.settings import MEDIA_ROOT
 
@@ -8,7 +9,7 @@ from slugify import slugify
 
 
 def author_media_path(instance, filename):
-    new_filename = f"{instance.slug}.{filename.split('.')[1]}"
+    new_filename = f"{instance.slug}.{filename.split('.')[-1]}"
     return f'authors/{instance.slug}/{new_filename}'
 
 
@@ -56,7 +57,7 @@ class Genre(models.Model):
 
 
 def book_directory_path(instance, filename):
-    new_filename = f"{instance.slug}.{filename.split('.')[1]}"
+    new_filename = f"{instance.slug}.{filename.split('.')[-1]}"
     return f'books/{instance.slug}/{new_filename}'
 
 
@@ -89,3 +90,15 @@ class Book(models.Model):
         verbose_name = "Книга"
         verbose_name_plural = "Книги"
     
+
+class Bookshelf(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    book = models.ManyToManyField(Book, verbose_name='Книга')
+    
+    class Meta:
+        ordering = ["user"]
+        verbose_name = "Книжная полка"
+        verbose_name_plural = "Книжная полки"
+    
+    def __str__(self):
+        return f'Книжная полка пользователя {self.user}'

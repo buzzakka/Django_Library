@@ -133,3 +133,28 @@ class DeleteBook(PermissionRequiredMixin, DeleteView):
     template_name = 'catalog/books/book_confirm_delete.html'
     success_url = reverse_lazy('books')
     permission_required = 'Catalog.delete_book'
+
+
+class BookshelfDetailView(LoginRequiredMixin, DetailView):
+    model = Bookshelf
+    template_name = 'catalog/bookshelf/bookshelf.html'
+    
+    paginate_by = 5
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['title_name'] = f"Книжная полка"
+        
+        books = Bookshelf.objects.get(user=self.request.user).book.all()
+        paginator = Paginator(books, self.paginate_by)
+
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        context['page_obj'] = page_obj        
+        return context
+
+    def get_object(self, queryset=None):
+        if not Bookshelf.objects.filter(user=self.request.user).exists():
+            Bookshelf.objects.create(user=self.request.user)
+        return self.request.user

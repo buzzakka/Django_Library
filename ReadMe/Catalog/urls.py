@@ -18,4 +18,7 @@ urlpatterns = [
     path("book/<slug:slug>/edit", views.EditBook.as_view(), name="edit_book"),
     path("book/<slug:slug>/delete", views.DeleteBook.as_view(), name="delete_book"),
     
+    path("bookshelf/", views.BookshelfDetailView.as_view(), name="bookshelf"),
+    
+    
 ]

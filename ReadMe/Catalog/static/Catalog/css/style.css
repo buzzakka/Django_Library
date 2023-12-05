@@ -278,6 +278,10 @@ a.edit-object:hover {
     font-size: 17px;
 }
 
-.page-num-selected {
+.simple-link {
+    color: #3399FF;
+}
 
+.simple-link:hover {
+    text-decoration: underline;
 }

@@ -22,13 +22,13 @@
             </div>
         </div>
         <div class="book__about object-item__about">
-            <p><strong>Автор:</strong> <a href="{{ book.author.get_absolute_url }}">{{ book.author }}</a></p>
+            <p><strong>Автор:</strong> <a href="{{ book.author.get_absolute_url }}" class="simple-link">{{ book.author }}</a></p>
             <p><strong>Жанры:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
             <p><strong>Описание: </strong></p>
             {% include "catalog/common/objects_about.html" with object=book object_name="о книге" %}
             <div class="book__buttons">
                 {% if book.link_to_file %}
-                    <button type="submit" class="button">Читать</button>
+                    <a href="{{ object.link_to_file.url }}"><button type="submit" class="button">Читать</button></a>
                     <button type="submit" class="button">Скачать</button>
                 {% endif %}
             </div>

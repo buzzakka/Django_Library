@@ -30,6 +30,12 @@
                 {% if book.link_to_file %}
                     <a href="{{ object.link_to_file.url }}"><button type="submit" class="button">Читать</button></a>
                     <button type="submit" class="button">Скачать</button>
+                    {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'book_detail' slug=book.slug %}">
+                        {% csrf_token %}
+                        <button type="submit" class="button">Добавить книгу</button>
+                    </form>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>

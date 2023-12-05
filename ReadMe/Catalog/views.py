@@ -3,6 +3,9 @@ from django.views.generic import TemplateView, CreateView, ListView, DetailView,
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
+from django.shortcuts import redirect
+from django.http import HttpResponseRedirect
+
 
 from .models import *
 from .forms import AddBookForm, AddAuthorForm, AddGenreForm
@@ -35,6 +38,15 @@ class BookDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['title_name'] = context['book'].title
         return context
+
+    def post(self, request, *args, **kwargs):
+        slug = self.kwargs['slug']
+        book = Book.objects.get(slug=slug)
+        bookshelf = Bookshelf.objects.get_or_create(user=self.request.user)[0]
+
+        bookshelf.book.add(book)
+        
+        return HttpResponseRedirect(self.request.path_info)
 
 
 class AuthorListView(ListView):
@@ -141,11 +153,17 @@ class BookshelfDetailView(LoginRequiredMixin, DetailView):
     
     paginate_by = 5
     
+    def get_object(self, queryset=None):
+        # Получаем объект Bookshelf для текущего пользователя
+        user = self.request.user
+        bookshelf = Bookshelf.objects.get_or_create(user=user)[0]
+        return bookshelf
+    
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['title_name'] = f"Книжная полка"
         
-        books = Bookshelf.objects.get(user=self.request.user).book.all()
+        books = self.object.book.all()
         paginator = Paginator(books, self.paginate_by)
 
         page_number = self.request.GET.get('page')
@@ -153,8 +171,3 @@ class BookshelfDetailView(LoginRequiredMixin, DetailView):
 
         context['page_obj'] = page_obj        
         return context
-
-    def get_object(self, queryset=None):
-        if not Bookshelf.objects.filter(user=self.request.user).exists():
-            Bookshelf.objects.create(user=self.request.user)
-        return self.request.user

@@ -7,7 +7,7 @@
     </h1>
     {% if page_obj %}
         {% for book in page_obj %}
-            {% include "catalog/bookshelf/bookshelf_book_info.html" with book=book %}
+            {% include "catalog/bookshelf/bookshelf_book_info.html" with slug=book.slug %}
         {% endfor %}
     {% else %}
         <p>Доступных книг нет.</p>

@@ -258,7 +258,7 @@ a.edit-object:hover {
     margin: auto;
 }
 
-.authorization-form form {
+.authorization-form form, .authorization-form form p {
     text-align: center;
 }
 

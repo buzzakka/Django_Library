@@ -1,3 +1,4 @@
+from typing import Any
 from django.contrib.auth import logout, get_user_model
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
@@ -7,22 +8,28 @@ from django.views.generic import CreateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import RegisterUserForm
-from Catalog.models import Bookshelf
 
 
 class LoginUser(LoginView):
-    form_class = AuthenticationForm
     template_name = 'users/login.html'
     extra_context = {'title': 'Авторизация'}
-    
+    next_page = 'index'
+    redirect_authenticated_user = True
+
     def get_success_url(self) -> str:
         return reverse_lazy('index')
+
 
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
     template_name = 'users/register.html'
     extra_context = {'title': 'Регистрация'}
-    
+
+    def dispatch(self, request, *args: Any, **kwargs: Any):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy('index'))
+        return super().dispatch(request, *args, **kwargs)
+
     def get_success_url(self) -> str:
         return reverse_lazy('index')
 

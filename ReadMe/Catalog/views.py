@@ -3,7 +3,6 @@ from django.views.generic import TemplateView, CreateView, ListView, DetailView,
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
-from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
 
 
@@ -154,7 +153,6 @@ class BookshelfDetailView(LoginRequiredMixin, DetailView):
     paginate_by = 5
     
     def get_object(self, queryset=None):
-        # Получаем объект Bookshelf для текущего пользователя
         user = self.request.user
         bookshelf = Bookshelf.objects.get_or_create(user=user)[0]
         return bookshelf

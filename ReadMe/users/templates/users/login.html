@@ -6,7 +6,12 @@
 
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% for f in form %}
+        <p><label for="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}</p>
+    {% endfor %}
+    {% if form.errors %}
+        <p class="error-message">Имя пользователя или пароль указаны неверно. Пожалуйста, попробуйте снова.</p>
+    {% endif %}
     <button type="submit" class="button">Войти</button>
 </form>
 </div>

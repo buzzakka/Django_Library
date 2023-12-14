@@ -16,8 +16,8 @@
     </div>
     <div class="profile__buttons">
         <a href="{% url 'users:edit-profile' %}"><button class="button">Изменить профиль</button></a>
-        <a href="#"><button class="button">Сменить пароль</button></a>
-        <a href="#"><button class="button delete-profile-button">Удалить профиль</button></a>
+        <a href="{% url 'users:change-password' %}"><button class="button">Сменить пароль</button></a>
+        <a href="{% url 'users:delete' %}"><button class="button delete-profile-button">Удалить профиль</button></a>
     </div>
 </div>
 

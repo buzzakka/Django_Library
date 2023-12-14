@@ -285,3 +285,36 @@ a.edit-object:hover {
 .simple-link:hover {
     text-decoration: underline;
 }
+
+.errorlist li {
+    color: red;
+}
+
+.profile h1 {
+    margin-bottom: 15px;
+}
+
+.profile__content {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.profile__content img {
+    margin-right: 20px;
+}
+
+.profile__buttons {
+    text-align: right;
+}
+
+.profile__buttons a:not(:last-child) {
+    margin-right: 10px;
+}
+
+.delete-profile-button {
+    background-color: #F80012;
+}
+
+.delete-profile-button:active {
+    background-color: #A60000;
+}

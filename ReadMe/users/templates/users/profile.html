@@ -1,15 +1,24 @@
 {% extends "catalog/base.html" %}
 
 {% block content %}
-<div class="post-object">
+<div class="post-object profile">
     <h1>{{ user.username }}</h1>
-    <p>Электронная почта:
-        {% if user.email %}
-            {{ user.email }}
-        {% else %}
-            не указана
-        {% endif %}
-    </p>
+    <div class="profile__content">
+        {% include "catalog/common/objects_image.html" with object=user img_size=150 %}
+        <div class="profile__info">
+            <h2>Информация:</h2>
+            <p><strong>Электронная почта</strong>: {% if user.email %} {{ user.email }} {% else %} не указана {% endif %}</p>
+            <p><strong>Имя</strong>: {% if user.first_name %} {{ user.first_name }} {% else %} не указано{% endif %}</p>
+            <p><strong>Фамилия</strong>: {% if user.last_name %} {{ user.last_name }} {% else %} не указана{% endif %}</p>
+            <p><strong>Профиль создан</strong>: {{ user.date_joined }}</p>
+            <p><strong>Последнее обновление профиля</strong>: {{ user.last_update }}</p>
+        </div>
+    </div>
+    <div class="profile__buttons">
+        <a href="{% url 'users:edit-profile' %}"><button class="button">Изменить профиль</button></a>
+        <a href="#"><button class="button">Сменить пароль</button></a>
+        <a href="#"><button class="button delete-profile-button">Удалить профиль</button></a>
+    </div>
 </div>
 
 {% endblock %}

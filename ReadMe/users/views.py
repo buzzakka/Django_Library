@@ -1,10 +1,9 @@
 from typing import Any
 from django.contrib.auth import logout, get_user_model
 from django.contrib.auth.views import LoginView
-from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import RegisterUserForm
@@ -46,3 +45,17 @@ class ProfileUser(LoginRequiredMixin, DetailView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+class EditProfile(LoginRequiredMixin, UpdateView):
+    model = get_user_model()
+    fields = ['first_name', 'last_name', 'image']
+    template_name = 'users/edit_profile.html'
+    extra_context = {'title': "Редактировать профиль"}
+    
+    def get_object(self, queryset=None):
+        return self.request.user
+    
+    def get_success_url(self) -> str:
+        return reverse_lazy('users:profile')
+    

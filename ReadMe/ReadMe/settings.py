@@ -29,7 +29,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Catalog.apps.CatalogConfig',
     'users.apps.UsersConfig',
-    'debug_toolbar',
+    'api.apps.ApiConfig',
+    # 'debug_toolbar',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -40,7 +42,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'ReadMe.urls'

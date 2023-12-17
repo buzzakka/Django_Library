@@ -29,7 +29,6 @@ class Author(models.Model):
         unique=True,
         db_index=True)
     date_of_birth = models.DateField(
-        blank=False,
         verbose_name='Дата рождения'
     )
     date_of_death = models.DateField(
@@ -39,7 +38,8 @@ class Author(models.Model):
     )
     about = models.TextField(
         max_length=1000,
-        blank=True, null=True,
+        blank=True,
+        null=True,
         default="",
         verbose_name='Об авторе'
     )

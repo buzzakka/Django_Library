@@ -8,6 +8,7 @@ from .permissions import IsStaff
 class BookApiList(generics.ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    permission_classes = [IsStaff,]
 
 
 class BookApiUpdate(generics.RetrieveUpdateDestroyAPIView):

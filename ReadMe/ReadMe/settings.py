@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     # 'debug_toolbar',
     'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +136,14 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 AUTH_USER_MODEL = "users.User"
+
+
+# REST FRAMEWORK
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+}

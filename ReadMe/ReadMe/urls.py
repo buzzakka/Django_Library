@@ -7,7 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("Catalog.urls")),
     path('users/', include("users.urls", namespace="users")),
-    path('api/v1/', include("api.urls", namespace="api")),
+    path('api/v1/', include("api.urls")),
     # path("__debug__/", include("debug_toolbar.urls")),
 ]
 

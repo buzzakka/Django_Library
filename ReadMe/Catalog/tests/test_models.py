@@ -207,18 +207,12 @@ class BookshelfTest(TestCase):
             last_name=f"{AUTHOR_LAST_NAME}",
             date_of_birth=f"{AUTHOR_DATE_OF_BIRTH}"
         )
-        self.book = Book.objects.create(
-            title=BOOK_TITLE,
-            author=self.author,
-            about=BOOK_ABOUT,
-            link_to_file=SimpleUploadedFile("test.pdf", b"file info"),
-            image=SimpleUploadedFile("test.png", b"png info")
-        )
-        self.user = get_user_model().objects.create_user(username=USER_USERNAME, password=USER_PASSWORD, email=USER_EMAIL)
+        self.book = Book.objects.create(title=BOOK_TITLE, author=self.author,)
         
+        self.user, created = get_user_model().objects.get_or_create(username=USER_USERNAME, email=USER_EMAIL, password=USER_PASSWORD)
         self.bookshelf, created = Bookshelf.objects.get_or_create(user=self.user)
         self.bookshelf.book.add(self.book)
-
+        
     def test_user_verbose(self):
         self.assertEqual(self.bookshelf._meta.get_field("user").verbose_name, "Пользователь")
     

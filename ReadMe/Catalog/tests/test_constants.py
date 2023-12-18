@@ -8,8 +8,11 @@ AUTHOR_DATE_OF_BIRTH = '1864-10-10'
 AUTHOR_DATE_OF_DEATH = '1964-10-10'
 AUTHOR_ABOUT = 'test about text'
 
-# URL
-BASE_URL = 'http://127.0.0.1:8000'
+# Модель Book
+BOOK_TITLE = 'Название книги тест'
+BOOK_GENRE = 1
+BOOK_ABOUT = "Test about book"
 
-# Изображение для теста
-IMG_PATH = "ReadMe/Catalog/static/Catalog/img/no_image_for_object.png"
+USER_USERNAME = 'username'
+USER_EMAIL = 'email@gmail.com'
+USER_PASSWORD = 'password'

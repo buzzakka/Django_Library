@@ -3,7 +3,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.contrib.auth import get_user_model
 
 from Catalog.models import *
-from .test_constants import *
+from .constants import *
 
 from slugify import slugify
 from os import path

@@ -5,11 +5,10 @@ from .models import Book, Author, Genre
 
 
 class AddBookForm(forms.ModelForm):
-    # author = forms.ModelChoiceField(
-    #     queryset=Author.objects.all(),
-    #     empty_label="Автор не выбран"
-    #     # label="Автор"
-    # )
+    author = forms.ModelChoiceField(
+        queryset=Author.objects.all(),
+        empty_label="Автор не выбран"
+    )
 
     class Meta:
         model = Book

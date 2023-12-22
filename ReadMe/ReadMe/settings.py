@@ -147,3 +147,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ),
 }
+
+LOGIN_REDIRECT_URL = "/users/login/"
+LOGIN_URL = "/users/login/"

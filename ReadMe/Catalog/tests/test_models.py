@@ -9,7 +9,6 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.contrib.auth import get_user_model
 
 from Catalog.models import *
-from .constants import *
 
 TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
@@ -165,8 +164,8 @@ class AuthorModelTest(TestCase):
 
     def test_is_correct_image_path(self):
         new_filename = f"{self.author.slug}.png"
-        correct_path = f"{TEMP_MEDIA_ROOT}/authors/{self.author.slug}/{new_filename}"
-        self.assertEqual(self.author.image.path, correct_path)
+        correct_path = f"/media/authors/{self.author.slug}/{new_filename}"
+        self.assertEqual(self.author.image.url, correct_path)
 
     def test_get_absolute_url(self):
         correct_url = f"/author/{self.author.slug}"
@@ -281,13 +280,13 @@ class BookModelTest(TestCase):
 
     def test_is_correct_image(self):
         new_filename = f"{self.book.slug}.png"
-        correct_path = f"{TEMP_MEDIA_ROOT}/books/{self.book.slug}/{new_filename}"
-        self.assertEqual(self.book.image.path, correct_path)
+        correct_path = f"/media/books/{self.book.slug}/{new_filename}"
+        self.assertEqual(self.book.image.url, correct_path)
 
     def test_is_correct_link_to_file(self):
         new_filename = f"{self.book.slug}.pdf"
-        correct_path = f"{TEMP_MEDIA_ROOT}/books/{self.book.slug}/{new_filename}"
-        self.assertEqual(self.book.link_to_file.path, correct_path)
+        correct_path = f"/media/books/{self.book.slug}/{new_filename}"
+        self.assertEqual(self.book.link_to_file.url, correct_path)
 
     def test_get_absolute_url(self):
         correct_url = f"/book/{self.book.slug}"

@@ -1,5 +1,5 @@
 {% if object.about %}
-    <p>{{ object.about }}</p>
+    <p>{{ object.about|truncatewords_html:100 }}</p>
 {% else %}
     <p>К сожалению, сейчас информация {{ object_name }} отсутствует.</p>
 {% endif %}

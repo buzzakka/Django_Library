@@ -13,7 +13,11 @@
                 </div>
                 <div class="list-block__info">
                     <h3><a href="{{ author.get_absolute_url }}">{{ author.first_name }} {{ author.last_name }}</a></h3>
-                    {% include "catalog/common/objects_about.html" with object=author object_name="об авторе" %}
+                    {% if author.about %}
+                        <p>{{ author.about|truncatewords_html:100 }}</p>
+                    {% else %}
+                        <p>К сожалению, сейчас информация об авторе отсутствует.</p>
+                    {% endif %}
                 </div>
             </li>
             {% endfor %}

@@ -21,7 +21,11 @@
         </div>
         <div class="author__about">
             <h3>Об авторе:</h3>
-            {% include "catalog/common/objects_about.html" with object=author object_name="об авторе" %}
+            {% if author.about %}
+                <p>{{ author.about }}</p>
+            {% else %}
+                <p>К сожалению, сейчас информация об авторе отсутствует.</p>
+            {% endif %}
         </div>
     </div>
 </div>

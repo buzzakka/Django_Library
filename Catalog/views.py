@@ -132,7 +132,7 @@ class AddGenre(PermissionRequiredMixin, CreateView):
     """
     form_class = AddGenreForm
     template_name = 'catalog/books/add_genre.html'
-    success_url = reverse_lazy('add_genre')
+    success_url = reverse_lazy('catalog:add_genre')
     permission_required = 'Catalog.add_genre'
 
     extra_context = {

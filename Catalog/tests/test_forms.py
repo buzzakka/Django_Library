@@ -28,40 +28,40 @@ class AddGenreFormTest(TestCase):
         super().tearDownClass()
         shutil.rmtree(TEMP_MEDIA_ROOT, ignore_errors=True)
 
-    # def test_add_genre_form(self):
-    #     genres_count = Genre.objects.count()
-    #
-    #     form_data = {'genre': 'test_genre'}
-    #
-    #     self.authorized_client.post(
-    #         reverse('catalog:add_genre'),
-    #         data=form_data
-    #     )
-    #
-    #     self.assertEqual(Genre.objects.count(), genres_count + 1)
-    #     self.assertTrue(Genre.objects.filter(genre='test_genre').exists())
+    def test_add_genre_form(self):
+        genres_count = Genre.objects.count()
 
-    # def test_add_genre_form_unique_genre_error(self):
-    #     genres_count = Genre.objects.count()
-    #
-    #     form_data = {'genre': 'test_genre'}
-    #
-    #     self.authorized_client.post(
-    #         reverse('catalog:add_genre'),
-    #         data=form_data
-    #     )
-    #     response = self.authorized_client.post(
-    #         reverse('catalog:add_genre'),
-    #         data=form_data
-    #     )
-    #     self.assertFormError(
-    #         response,
-    #         'form',
-    #         'genre',
-    #         'Такой жанр уже существует'
-    #     )
-    #
-    #     self.assertEqual(Genre.objects.count(), genres_count + 1)
+        form_data = {'genre': 'test_genre'}
+
+        self.authorized_client.post(
+            reverse('catalog:add_genre'),
+            data=form_data
+        )
+
+        self.assertEqual(Genre.objects.count(), genres_count + 1)
+        self.assertTrue(Genre.objects.filter(genre='test_genre').exists())
+
+    def test_add_genre_form_unique_genre_error(self):
+        genres_count = Genre.objects.count()
+
+        form_data = {'genre': 'test_genre'}
+
+        self.authorized_client.post(
+            reverse('catalog:add_genre'),
+            data=form_data
+        )
+        response = self.authorized_client.post(
+            reverse('catalog:add_genre'),
+            data=form_data
+        )
+        self.assertFormError(
+            response,
+            'form',
+            'genre',
+            'Такой жанр уже существует'
+        )
+
+        self.assertEqual(Genre.objects.count(), genres_count + 1)
 
 
 @override_settings(MEDIA_ROOT=TEMP_MEDIA_ROOT)

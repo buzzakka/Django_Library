@@ -10,6 +10,9 @@ from .forms import AddBookForm, AddAuthorForm, AddGenreForm
 
 
 class Index(TemplateView):
+    """
+    Класс для отображения главной страницы index.html
+    """
     template_name = 'catalog/index.html'
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
@@ -19,6 +22,9 @@ class Index(TemplateView):
 
 
 class BookListView(ListView):
+    """
+    Класс для отображения страницы списка всех книг
+    """
     model = Book
     template_name = 'catalog/books/book_list.html'
     paginate_by = 5
@@ -30,6 +36,9 @@ class BookListView(ListView):
 
 
 class BookDetailView(DetailView):
+    """
+    Класс для отображения страницы экземпляра книги
+    """
     model = Book
     template_name = 'catalog/books/book_detail.html'
 
@@ -39,6 +48,9 @@ class BookDetailView(DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
+        """
+        Переопределение метода POST, нужен для добавления книги в свою полку
+        """
         slug = self.kwargs['slug']
         book = Book.objects.get(slug=slug)
         bookshelf = Bookshelf.objects.get_or_create(user=self.request.user)[0]
@@ -49,6 +61,9 @@ class BookDetailView(DetailView):
 
 
 class AuthorListView(ListView):
+    """
+    Класс для отображения страницы списка всех авторов
+    """
     model = Author
     template_name = 'catalog/authors/author_list.html'
     paginate_by = 5
@@ -60,6 +75,9 @@ class AuthorListView(ListView):
 
 
 class AuthorDetailView(DetailView):
+    """
+    Класс для отображения страницы экземпляра автора
+    """
     model = Author
     template_name = 'catalog/authors/author_detail.html'
     paginate_by = 5
@@ -80,6 +98,10 @@ class AuthorDetailView(DetailView):
 
 
 class AddAuthor(PermissionRequiredMixin, CreateView):
+    """
+    Класс для добавления нового автора
+    Доступен только для пользователей с разрешением add_author
+    """
     form_class = AddAuthorForm
     template_name = 'catalog/authors/add_author.html'
     permission_required = 'Catalog.add_author'
@@ -90,6 +112,10 @@ class AddAuthor(PermissionRequiredMixin, CreateView):
 
 
 class AddBook(PermissionRequiredMixin, CreateView):
+    """
+    Класс для добавления новой книги
+    Доступен только для пользователей с разрешением add_book
+    """
     form_class = AddBookForm
     template_name = 'catalog/books/add_book.html'
     permission_required = 'Catalog.add_book'
@@ -100,6 +126,10 @@ class AddBook(PermissionRequiredMixin, CreateView):
 
 
 class AddGenre(PermissionRequiredMixin, CreateView):
+    """
+    Класс для добавления нового жанра
+    Доступен только для пользователей с разрешением add_genre
+    """
     form_class = AddGenreForm
     template_name = 'catalog/books/add_genre.html'
     success_url = reverse_lazy('add_genre')
@@ -111,6 +141,10 @@ class AddGenre(PermissionRequiredMixin, CreateView):
 
 
 class EditAuthor(PermissionRequiredMixin, UpdateView):
+    """
+    Класс для изменения информации об авторе
+    Доступен только для пользователей с разрешением change_author
+    """
     model = Author
     fields = ['first_name', 'last_name', 'date_of_birth',
               'date_of_death', 'about', 'image',]
@@ -123,6 +157,10 @@ class EditAuthor(PermissionRequiredMixin, UpdateView):
 
 
 class EditBook(PermissionRequiredMixin, UpdateView):
+    """
+    Класс для изменения информации о книге
+    Доступен только для пользователей с разрешением change_book
+    """
     model = Book
     fields = ['title', 'author', 'genre', 'about', 'link_to_file', 'image',]
     template_name = 'catalog/books/edit_book.html'
@@ -134,6 +172,10 @@ class EditBook(PermissionRequiredMixin, UpdateView):
 
 
 class DeleteAuthor(PermissionRequiredMixin, DeleteView):
+    """
+    Класс для удаления автора
+    Доступен только для пользователей с разрешением delete_author
+    """
     model = Author
     template_name = 'catalog/authors/author_confirm_delete.html'
     permission_required = 'Catalog.delete_author'
@@ -141,6 +183,10 @@ class DeleteAuthor(PermissionRequiredMixin, DeleteView):
 
 
 class DeleteBook(PermissionRequiredMixin, DeleteView):
+    """
+    Класс для удаления книги
+    Доступен только для пользователей с разрешением delete_book
+    """
     model = Book
     template_name = 'catalog/books/book_confirm_delete.html'
     success_url = reverse_lazy('books')
@@ -148,6 +194,10 @@ class DeleteBook(PermissionRequiredMixin, DeleteView):
 
 
 class BookshelfDetailView(LoginRequiredMixin, DetailView):
+    """
+    Класс для отображения полки книг пользователя
+    Доступен только для авторизованных пользователей
+    """
     model = Bookshelf
     template_name = 'catalog/bookshelf/bookshelf.html'
 

@@ -16,7 +16,7 @@ class Author(models.Model):
     slug = models.SlugField(max_length=200, unique=True, db_index=True)
     date_of_birth = models.DateField(verbose_name='Дата рождения')
     date_of_death = models.DateField(blank=True, null=True, verbose_name='Дата смерти')
-    about = models.TextField(max_length=1000, blank=True, null=True, verbose_name='Об авторе')
+    about = models.TextField(blank=True, null=True, verbose_name='Об авторе')
 
     def author_media_path(instance, filename):
         """
@@ -47,8 +47,8 @@ class Author(models.Model):
 
 # Модель представления жанра книги с информацией о названии жанра и его slug
 class Genre(models.Model):
-    genre = models.CharField(max_length=200, db_index=True, unique=True, verbose_name='Жанр')
-    slug = models.SlugField(max_length=200, unique=True, db_index=True)
+    genre = models.CharField(max_length=100, db_index=True, unique=True, verbose_name='Жанр')
+    slug = models.SlugField(max_length=150, unique=True, db_index=True)
 
     def save(self, *args, **kwargs):
         # Создание slug на основе названия жанра
@@ -67,11 +67,11 @@ class Genre(models.Model):
 # Модель представления автора с основной информацией, которая включает название, slug, автора,
 # список жанров книги, описание книги и ее рейтинг
 class Book(models.Model):
-    title = models.CharField(max_length=200, unique=True, db_index=True, verbose_name='Название')
+    title = models.CharField(max_length=150, unique=True, db_index=True, verbose_name='Название')
     slug = models.SlugField(max_length=200, unique=True, db_index=True, default=slugify(f'{title}'))
     author = models.ForeignKey(Author, null=True, on_delete=models.SET_NULL, verbose_name='Автор')
     genre = models. ManyToManyField(Genre, verbose_name='Жанр')
-    about = models.TextField(max_length=1000, verbose_name='Описание книги')
+    about = models.TextField(verbose_name='Описание книги')
     rating = models.PositiveSmallIntegerField(validators=[MaxValueValidator(5)], default=0, verbose_name='Рейтинг')
 
     def book_directory_path(instance, filename):

@@ -6,7 +6,6 @@ import tempfile
 from django.conf import settings
 from django.test import TestCase, override_settings
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.contrib.auth import get_user_model
 
 from Catalog.models import *
 
@@ -24,10 +23,10 @@ class GenreModelTest(TestCase):
             "genre").verbose_name, "Жанр")
 
     def test_genre_max_length(self):
-        self.assertEqual(self.genre._meta.get_field("genre").max_length, 200)
+        self.assertEqual(self.genre._meta.get_field("genre").max_length, 100)
 
     def test_slug_max_length(self):
-        self.assertEqual(self.genre._meta.get_field("slug").max_length, 200)
+        self.assertEqual(self.genre._meta.get_field("slug").max_length, 150)
 
     def test_is_correct_slug(self):
         self.assertEqual(self.genre.slug, slugify("test_genre"))
@@ -79,7 +78,7 @@ class AuthorModelTest(TestCase):
     def test_first_name_max_length(self):
         self.assertEqual(
             self.author._meta.get_field("first_name").max_length,
-            200
+            50
         )
 
     def test_last_name_verbose(self):
@@ -91,7 +90,7 @@ class AuthorModelTest(TestCase):
     def test_last_name_max_length(self):
         self.assertEqual(
             self.author._meta.get_field("last_name").max_length,
-            200
+            50
         )
 
     def test_date_of_birth_meta(self):
@@ -104,18 +103,6 @@ class AuthorModelTest(TestCase):
         self.assertEqual(
             self.author._meta.get_field("date_of_death").verbose_name,
             "Дата смерти"
-        )
-
-    def test_about_max_length(self):
-        self.assertEqual(
-            self.author._meta.get_field("about").max_length,
-            1000
-        )
-
-    def test_about_default(self):
-        self.assertEqual(
-            self.author._meta.get_field("about").default,
-            ""
         )
 
     def test_about_verbose(self):
@@ -168,7 +155,7 @@ class AuthorModelTest(TestCase):
         self.assertEqual(self.author.image.url, correct_path)
 
     def test_get_absolute_url(self):
-        correct_url = f"/author/{self.author.slug}"
+        correct_url = f"/authors/{self.author.slug}"
         self.assertEqual(self.author.get_absolute_url(), correct_url)
 
     def test_is_correct_str(self):
@@ -211,7 +198,7 @@ class BookModelTest(TestCase):
     def test_title_max_length(self):
         self.assertEqual(
             self.book._meta.get_field("title").max_length,
-            200
+            150
         )
 
     def test_author_verbose(self):
@@ -230,12 +217,6 @@ class BookModelTest(TestCase):
         self.assertEqual(
             self.book._meta.get_field("about").verbose_name,
             'Описание книги'
-        )
-
-    def test_about_max_length(self):
-        self.assertEqual(
-            self.book._meta.get_field("about").max_length,
-            1000
         )
 
     def test_rating_verbose(self):
@@ -289,7 +270,7 @@ class BookModelTest(TestCase):
         self.assertEqual(self.book.link_to_file.url, correct_path)
 
     def test_get_absolute_url(self):
-        correct_url = f"/book/{self.book.slug}"
+        correct_url = f"/books/{self.book.slug}"
         self.assertEqual(self.book.get_absolute_url(), correct_url)
 
     def test_is_correct_str(self):

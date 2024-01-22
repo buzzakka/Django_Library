@@ -17,7 +17,7 @@ class Index(TemplateView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['title_name'] = "Главная страница"
+        context['title_name'] = 'Главная страница'
         return context
 
 
@@ -31,7 +31,7 @@ class BookListView(ListView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['title_name'] = "Все книги"
+        context['title_name'] = 'Все книги'
         return context
 
 
@@ -70,7 +70,7 @@ class AuthorListView(ListView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['title_name'] = "Все авторы"
+        context['title_name'] = 'Все авторы'
         return context
 
 
@@ -84,7 +84,7 @@ class AuthorDetailView(DetailView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['title_name'] = f"{context['author'].first_name} {context['author'].last_name}"
+        context['title_name'] = f'{context["author"].first_name} {context["author"].last_name}'
 
         books = context['author'].book_set.all()
         paginator = Paginator(books, self.paginate_by)
@@ -146,8 +146,7 @@ class EditAuthor(PermissionRequiredMixin, UpdateView):
     Доступен только для пользователей с разрешением change_author
     """
     model = Author
-    fields = ['first_name', 'last_name', 'date_of_birth',
-              'date_of_death', 'about', 'image',]
+    fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death', 'about', 'image',]
     template_name = 'catalog/authors/edit_author.html'
     permission_required = 'Catalog.change_author'
 

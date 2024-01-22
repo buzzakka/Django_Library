@@ -22,7 +22,7 @@
         <header class="header">
             <div class="container">
                 <ul class="menu-nav">
-                    <li><a href="{% url 'index' %}" class="logo">
+                    <li><a href="{% url 'catalog:index' %}" class="logo">
                         <img src="{% static 'Catalog/img/main_logo.svg' %}" alt="" width="50px">
                         <h2>ReadMe</h2>
                     </a></li>
@@ -43,29 +43,29 @@
             <div class="container">
                 <div class="sidebar-nav">
                     <ul>
-                        <a href="{% url 'books' %}">
+                        <a href="{% url 'catalog:books' %}">
                             <li>
                                 <img src="{% static 'Catalog/img/icons/books.png' %}" alt="" class="sidebar-nav__icon">
                                 <span>Все книги</span>
                             </li>
                         </a>
-                        <a href="{% url 'authors' %}">
+                        <a href="{% url 'catalog:authors' %}">
                             <li>
                                 <img src="{% static 'Catalog/img/icons/authors.png' %}" alt="" class="sidebar-nav__icon">
                                 <span>Все авторы</span>
                             </li>
                         </a>
                         {% if user.is_authenticated %}
-                        <a href="{% url 'bookshelf' %}" class="">
+                        <a href="{% url 'catalog:bookshelf' %}" class="">
                             <li>
                                 <img src="{% static 'Catalog/img/icons/my-books.png' %}" alt="" class="sidebar-nav__icon">
                                 <span>Моя полка</span>
                             </li>
                         </a>
                         {% if request.user|has_group:"staff" %}
-                        <a href="{% url 'add_book' %}" class=""><li>Добавить книгу</li></a>
-                        <a href="{% url 'add_author' %}" class=""><li>Добавить автора</li></a>
-                        <a href="{% url 'add_genre' %}" class=""><li>Добавить жанр</li></a>
+                        <a href="{% url 'catalog:add_book' %}" class=""><li>Добавить книгу</li></a>
+                        <a href="{% url 'catalog:add_author' %}" class=""><li>Добавить автора</li></a>
+                        <a href="{% url 'catalog:add_genre' %}" class=""><li>Добавить жанр</li></a>
                         {% endif %}
                         {% endif %}
                     </ul>

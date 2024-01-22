@@ -9,8 +9,8 @@
         <h1>
             {{ author.first_name }} {{ author.last_name }}
             {% if request.user|has_group:"staff" %}
-            <a href="{% url 'edit_author' slug=author.slug %}" class="edit-object">[Редактировать]</a>
-            <a href="{% url 'delete_author' slug=author.slug %}" class="edit-object">[Удалить]</a>
+            <a href="{% url 'catalog:edit_author' slug=author.slug %}" class="edit-object">[Редактировать]</a>
+            <a href="{% url 'catalog:delete_author' slug=author.slug %}" class="edit-object">[Удалить]</a>
             {% endif %}
         </h1>
         <p>{{ author.date_of_birth|date:"d.m.Y" }} - {{ author.date_of_death|date:"d.m.Y"|default:"..." }}</p>

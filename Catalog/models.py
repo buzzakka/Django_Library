@@ -55,7 +55,7 @@ class Author(models.Model):
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('author_detail', kwargs={'slug': self.slug})
+        return reverse('catalog:author_detail', kwargs={'slug': self.slug})
 
     class Meta:
         ordering = ["first_name", "last_name"]
@@ -151,7 +151,7 @@ class Book(models.Model):
     display_genre.short_description = 'Genre'
 
     def get_absolute_url(self):
-        return reverse('book_detail', kwargs={'slug': self.slug})
+        return reverse('catalog:book_detail', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.title

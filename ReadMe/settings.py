@@ -1,22 +1,17 @@
 from pathlib import Path
+from dotenv import dotenv_values
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# config - секретрные данные из файла .env
+config = dotenv_values(".env")
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = config.get("SECRET_KEY")
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*',]
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -28,7 +23,6 @@ INSTALLED_APPS = [
     'Catalog.apps.CatalogConfig',
     'users.apps.UsersConfig',
     'api.apps.ApiConfig',
-    # 'debug_toolbar',
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
@@ -42,7 +36,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'ReadMe.urls'
@@ -66,31 +59,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ReadMe.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'readme_bd',
-#        'USER': 'admin',
-#        'PASSWORD': 'admin',
-#        'HOST': 'localhost',
-#        'PORT': '5432',
-#    }
-#}
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+   'default': {
+       'ENGINE':    'django.db.backends.postgresql',
+       'NAME':      config['DB_NAME'],
+       'USER':      config['DB_USER'],
+       'PASSWORD':  config['DB_PASSWORD'],
+       'HOST':      config['DB_HOST'],
+       'PORT':      config['DB_PORT'],
+   }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -107,10 +85,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
-
 LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'Europe/Moscow'
@@ -120,18 +94,12 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -141,9 +109,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 AUTH_USER_MODEL = "users.User"
-
-
-# REST FRAMEWORK
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
